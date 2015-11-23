@@ -1,0 +1,64 @@
+---
+layout: post
+title: "Geographic clustering of UK cities"
+date: 2015-11-23 11:42:00 +0000
+categories: clustering dbscan uk cities 
+---
+
+I know I am probably late to this party but I recently found out about DBSCAN or "A 
+Density-Based Algorithm for Discovering Clusters in Large Spatial Databases with Noise"[^1]. In a nutshell, the algorithm visits successive data point and asks whether neighbouring points are density-reachable. In other words is it possible to connect two points with a chain of points all conforming to some density criteria. This has some major advantages over other clustering algorithms that I have used before.
+
+* It can identify clusters of arbitrary shape.
+* Number of clusters is not an input parameter.
+* It's fast as it only visits the data points rather than the space in between.
+* A data point with no close neighbours is assigned noise rather than its nearest cluster.
+
+Let have a go at clustering uk cities from `library(maps)`. First load the packages and the data, then subset the data to get only the UK cities.
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(maps)
+library(dbscan)
+
+data("world.cities")
+UK <- world.cities %>% filter(country.etc == "UK")
+```
+
+Now we can run the algorithm on the latitude and longitude collumns. Then we can pull the cluster assignments out of the resulting object.
+
+```{r}
+EPS <- 0.15
+clusters <- dbscan(select(UK, lat, long), eps = EPS)
+UK$cluster <- clusters$cluster
+```
+
+```{r, echo=FALSE}
+theme_stripped <- theme(panel.background = element_blank(),
+                        panel.grid = element_blank())
+theme_empty <- theme(axis.text = element_blank(),
+                     axis.title = element_blank(),
+                     axis.ticks = element_blank())
+```
+
+Finally we can split the original data into two according to whether dbscan has assigned or cluster or noise.
+
+```{r}
+groups  <- UK %>% filter(cluster != 0)
+noise  <- UK %>% filter(cluster == 0)
+```
+
+Now lets have a look at the results.
+
+```{r}
+ggplot(UK, aes(x = long, y = lat, alpha = 0.5)) + 
+  geom_point(aes(fill = "grey"), noise) +
+  geom_point(aes(colour = as.factor(cluster)), groups,
+             size = 3) +
+  coord_map() +
+  theme_stripped +
+  theme_empty +
+  theme(legend.position = "none")
+```
+
+[^1]: I recommend reading the paper which is quite accesible. Martin Ester, Hans-Peter Kriegel, Joerg Sander, Xiaowei Xu (1996). A Density-Based Algorithm for Discovering Clusters in Large Spatial Databases with Noise. Institute for Computer Science, University of Munich. Proceedings of 2nd International Conference on Knowledge Discovery and Data Mining (KDD-96).
