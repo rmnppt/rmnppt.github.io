@@ -17,4 +17,5 @@ twitter_username: rmnppt
 github_username: rmnppt
 
 # Build settings
-markdown: kramdown
+# markdown: kramdown
+markdown: redcarpet
