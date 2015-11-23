@@ -48,7 +48,7 @@ groups  <- UK %>% filter(cluster != 0)
 noise  <- UK %>% filter(cluster == 0)
 ```
 
-Now lets have a look at the results.
+Now lets have a look at the results[^2].
 
 ```{r}
 ggplot(UK, aes(x = long, y = lat, alpha = 0.5)) + 
@@ -62,3 +62,5 @@ ggplot(UK, aes(x = long, y = lat, alpha = 0.5)) +
 ```
 
 [^1]: I recommend reading the paper which is quite accesible. Martin Ester, Hans-Peter Kriegel, Joerg Sander, Xiaowei Xu (1996). A Density-Based Algorithm for Discovering Clusters in Large Spatial Databases with Noise. Institute for Computer Science, University of Munich. Proceedings of 2nd International Conference on Knowledge Discovery and Data Mining (KDD-96).
+
+[^2]: I am stripping out some of the ggplot defaults with two objects `theme_stripped` and `theme_empty` which I use routinely to either remove the background and gridlines or to remove everything including axes.
