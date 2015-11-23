@@ -6,7 +6,7 @@ categories: clustering dbscan uk cities
 ---
 
 I know I am probably late to this party but I recently found out about DBSCAN or "A 
-Density-Based Algorithm for Discovering Clusters in Large Spatial Databases with Noise"[1]. In a nutshell, the algorithm visits successive data point and asks whether neighbouring points are density-reachable. In other words is it possible to connect two points with a chain of points all conforming to some density criteria. This has some major advantages over other clustering algorithms that I have used before.
+Density-Based Algorithm for Discovering Clusters in Large Spatial Databases with Noise"[^1]. In a nutshell, the algorithm visits successive data point and asks whether neighbouring points are density-reachable. In other words is it possible to connect two points with a chain of points all conforming to some density criteria. This has some major advantages over other clustering algorithms that I have used before.
 
 * It can identify clusters of arbitrary shape.
 * Number of clusters is not an input parameter.
