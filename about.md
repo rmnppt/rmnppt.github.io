@@ -13,3 +13,5 @@ Feel free to contact me about any of this.
 Thanks
 :-)
 
+p.s. I forward these blogs to [r-bloggers.com](r-bloggers.com)
+
