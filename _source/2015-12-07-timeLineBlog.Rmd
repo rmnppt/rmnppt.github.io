@@ -1,8 +1,9 @@
 ---
-title: "Downloading your twitter feed"
+title: "Downloading your twitter feed in R"
 author: "Roman Popat"
 date: "7 December 2015"
 output: html_document
+layout: post
 ---
 
 The `twitteR` library is one of the most comprehensive R bindings for an API that I have ever seen. Thanks a million to [Jeff Gentry](https://github.com/geoffjentry/twitteR) for authoring and maintaining it. It took me a while to get to know it and I thought I'd share a little trick here. I recently wanted to trace the generation of my personal data from a morning in my life (possibly more on that later...). One aspect of this is the tweets that flow into my feed. `twitteR` has a very useful function for this.
