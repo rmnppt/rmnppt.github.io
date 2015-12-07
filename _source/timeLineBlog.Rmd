@@ -1,0 +1,41 @@
+---
+title: "Downloading your twitter feed"
+author: "Roman Popat"
+date: "7 December 2015"
+output: html_document
+---
+
+The `twitteR` library is one of the most comprehensive R bindings for an API that I have ever seen. Thanks a million to [Jeff Gentry](https://github.com/geoffjentry/twitteR) for authoring and maintaining it. It took me a while to get to know it and I thought I'd share a little trick here. I recently wanted to trace the generation of my personal data from a morning in my life (possibly more on that later...). One aspect of this is the tweets that flow into my feed. `twitteR` has a very useful function for this.
+
+```{r, message = FALSE, eval = F}
+library(twitteR)
+source("~/OneDriveBusiness/Projects/Authentications/twitterOAuth.R")
+setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_secret)
+```
+
+Now we're authenticated and ready to go, we can call `homeTimeline()` with the argument `retryOnRateLimit` set high. Note that twitter will only allow you to retrieve so many tweets from your feed so if you want recent tweets get them while you still can.
+
+```{r, message = FALSE, eval = F}
+timeLine <- homeTimeline(n = 800, retryOnRateLimit = 1000)
+```
+
+Now we can use some of the date functionality to subset the tweets retaining only those in the relevant time period.
+
+```{r, message = FALSE, eval = F}
+beginning <-  as.POSIXct("2015-12-07 09:00:00 UTC")
+end <- as.POSIXct("2015-12-07 11:00:00 UTC")
+
+times <- lapply(timeLine, function(x) x$created)
+these <- which(times > beginning & times < end)
+
+myMorningTweets <- timeLine[these]
+```
+
+Now that we have the subset that we want, we can use the provided function to turn the list like object into a data frame and store it for later.
+
+```{r, message = FALSE, eval = F}
+myMorningTweetsDF <- twListToDF(myMorningTweets)
+write.csv(myMorningTweetsDF, "data/myMorningTweets.csv")
+```
+
+
