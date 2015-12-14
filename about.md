@@ -8,10 +8,9 @@ I am a data scientist at [The Data Lab](http://thedatalab.com) in Scotland. We a
 
 As you can imagine this is a huge amount of fun and leads to the discovery of new methods and new tricks in handling and analysing data. As I move around in this journey, I will post bits and pieces on this page. Sometimes these are things that accompany The Data Lab [blogs](http://thedatalab.com/news). These articles (if written by me) will usually have an accompanying github repo. If so then I might well explain some of that in more detail here.
 
-Feel free to contact me about any of this.
+This site is hosted by github pages and each post is written in R markdown. The source for each post can be found [here](https://github.com/rmnppt/rmnppt.github.io/tree/master/_source). I forward these blogs to [r-bloggers.com](http://r-bloggers.com). If you are an R user, keep your eye on this site for nicely curated blog content relating to R and its uses.
 
-Thanks
-:-)
+Please feel free to contact me about any of this.
 
-p.s. I forward these blogs to [r-bloggers.com](http://r-bloggers.com)
+
 
