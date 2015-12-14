@@ -94,7 +94,7 @@ par(fg = "grey", las = 1)
 hist(resids, breaks = 50, col = "#ff000050",
      main = "", xlab = "Weekly mortality residuals")
 abline(v = fifteenPeak, col = "black")
-text(fifteenPeak, 100, "2014/15 winter peak value", pos = 4)
+text(fifteenPeak, 100, "2014/15 winter\npeak value", pos = 4)
 ```
 
 ![plot of chunk unnamed-chunk-5](/figure/source/2015-12-11-STL-winterMortality/unnamed-chunk-5-1.png) 
@@ -114,9 +114,9 @@ mean(inTail)
 ```
 
 ```
-## [1] 0.9526
+## [1] 0.9476
 ```
 
-The 2014/15 winter peak mortality is in the 1% tail in 95.26 % of samples. Good evidence that this value is unsusual. Not that surprising since there are only 3 other residuals larger than it. So seasonal mortality winter 2014/15 does appear to have been unusually high.
+The 2014/15 winter peak mortality is in the 1% tail in 94.76 % of samples. Good evidence that this value is unsusual. Not that surprising since there are only 3 other residuals larger than it. So seasonal mortality winter 2014/15 does appear to have been unusually high.
 
 1. A full description of the method can be found in the following reference. R. B. Cleveland, W. S. Cleveland, J.E. McRae, and I. Terpenning (1990) STL: A Seasonal-Trend Decomposition Procedure Based on Loess. Journal of Official Statistics, 6, 3–73
