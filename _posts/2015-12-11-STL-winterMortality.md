@@ -5,7 +5,7 @@ date: "11 December 2015"
 output: html_document
 layout: post
 ---
-  
+
 I recently wrote a [blog](http://thedatalab.com/Fruit-and-veg-prices) on trends and seasonal variation in fruit and veg wholesale prices provided by DEFRA. It was using a beatiful technique called ‘STL’ or seasonal-trend decomposition via loess[^1]. Just now I spotted a dataset from the Office for National Statistics on [winter mortality](http://visual.ons.gov.uk/excesswintermortality/). 
 
 ONS highlight that: 
@@ -114,9 +114,11 @@ mean(inTail)
 ```
 
 ```
-## [1] 0.94958
+## [1] 0.94969
 ```
 
-The 2014/15 winter peak mortality is in the 1% tail in 94.958 % of samples. Good evidence that this value is unsusual. Not that surprising since there are only 3 other residuals larger than it. So seasonal mortality winter 2014/15 does appear to have been unusually high.
+The 2014/15 winter peak mortality is in the 1% tail in 94.969 % of samples. Good evidence that this value is unsusual. Not that surprising since there are only 3 other residuals larger than it. So seasonal mortality winter 2014/15 does appear to have been unusually high.
+
+[.Rmd Script](https://raw.githubusercontent.com/rmnppt/rmnppt.github.io/master/_source/2015-12-11-STL-winterMortality.Rmd) for this post.
 
 1. A full description of the method can be found in the following reference. R. B. Cleveland, W. S. Cleveland, J.E. McRae, and I. Terpenning (1990) STL: A Seasonal-Trend Decomposition Procedure Based on Loess. Journal of Official Statistics, 6, 3–73
