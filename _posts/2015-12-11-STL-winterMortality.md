@@ -114,9 +114,9 @@ mean(inTail)
 ```
 
 ```
-## [1] 0.9476
+## [1] 0.9485
 ```
 
-The 2014/15 winter peak mortality is in the 1% tail in 94.76 % of samples. Good evidence that this value is unsusual. Not that surprising since there are only 3 other residuals larger than it. So seasonal mortality winter 2014/15 does appear to have been unusually high.
+The 2014/15 winter peak mortality is in the 1% tail in 94.85 % of samples. Good evidence that this value is unsusual. Not that surprising since there are only 3 other residuals larger than it. So seasonal mortality winter 2014/15 does appear to have been unusually high.
 
 1. A full description of the method can be found in the following reference. R. B. Cleveland, W. S. Cleveland, J.E. McRae, and I. Terpenning (1990) STL: A Seasonal-Trend Decomposition Procedure Based on Loess. Journal of Official Statistics, 6, 3–73
