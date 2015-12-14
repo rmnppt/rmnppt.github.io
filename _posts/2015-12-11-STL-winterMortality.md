@@ -1,0 +1,122 @@
+---
+title: "Seasonal mortality trend decomposition"
+author: "Roman Popat"
+date: "11 December 2015"
+output: html_document
+layout: post
+---
+  
+I recently wrote a [blog](http://thedatalab.com/Fruit-and-veg-prices) on trends and seasonal variation in fruit and veg wholesale prices provided by DEFRA. It was using a beatiful technique called ‘STL’ or seasonal-trend decomposition via loess[^1]. Just now I spotted a dataset from the Office for National Statistics on [winter mortality](http://visual.ons.gov.uk/excesswintermortality/). 
+
+ONS highlight that: 
+
+* last winter was a particularly high winter mortality year and
+* that overall winter mortality was decreasing. 
+
+Lets take a look ourselves. We can read their .csv file straight from the site, and then apply the seasonal trend decomposition. For convenience, I am going to construct a new variable that counts the weeks as decimal years.
+
+
+```r
+dat <- read.csv("http://visual.ons.gov.uk/wp-content/uploads/2015/11/figure45.csv", as.is = T)
+
+# the splitN function will split a string vector and 
+# return a vector of the nth element of each split
+splitN <- function(dd, n, split)  {
+  sapply(dd, function(x) strsplit(as.character(x), split)[[1]][n])
+}
+dat$year <- as.numeric(splitN(dat$date, 1, "-"))
+dat$week <- as.numeric(splitN(dat$date, 2, "-"))
+dat$decimalYears <- dat$year + (dat$week/52)
+```
+
+Now we can apply the seasonal trend decomposition.
+
+
+```r
+t_series <- ts(dat$Deaths..thousands., frequency = 52)
+stl_series <- stl(t_series, 9)
+```
+
+I have prepared a function to plot the results of the seasonal trend decomposition.
+
+
+```r
+source("https://raw.githubusercontent.com/rmnppt/FruitAndVeg/master/Scripts/plotSTL.R")
+plotSTL(stl_series, "winter mortality", interval = 52)
+
+# We can add in some labels at January of each year
+Xindex <- which(dat$decimalYears %% 1 == 0)
+axis(1, labels = dat$decimalYears[Xindex], at = Xindex)
+```
+
+![plot of chunk unnamed-chunk-3](/figure/source/2015-12-11-STL-winterMortality/unnamed-chunk-3-1.png) 
+
+First lets test if the overall trend (3rd panel) is decreasing.
+
+
+```r
+y <- stl_series$time.series[,2]
+x <- 1:nrow(stl_series$time.series)
+mod <- lm(y ~ x)
+summary(mod)
+```
+
+```
+## 
+## Call:
+## lm(formula = y ~ x)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.3944 -0.2009 -0.0596  0.1299  0.9631 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  1.025e+01  1.898e-02  540.03   <2e-16 ***
+## x           -1.062e-03  3.938e-05  -26.98   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.2738 on 832 degrees of freedom
+## Multiple R-squared:  0.4666,	Adjusted R-squared:  0.4659 
+## F-statistic: 727.7 on 1 and 832 DF,  p-value: < 2.2e-16
+```
+
+Seems like an unambiguous negative trend then, although quite weak. The coefficient is -0.001062 and this is in deaths per thousand per week. This equates to 55.23 fewer deaths per million each year since 1999. 
+
+Now lets look at 2014 in the distribution of residuals or in the STL language, the remainder. 
+
+
+```r
+resids <- stl_series$time.series[,"remainder"]
+fifteenPeak <- max(resids[dat$year == 2015])
+par(fg = "grey", las = 1)
+hist(resids, breaks = 50, col = "#ff000050",
+     main = "", xlab = "Weekly mortality residuals")
+abline(v = fifteenPeak, col = "black")
+text(fifteenPeak, 100, "2014/15 winter peak value", pos = 4)
+```
+
+![plot of chunk unnamed-chunk-5](/figure/source/2015-12-11-STL-winterMortality/unnamed-chunk-5-1.png) 
+
+How can we test the hypothesis that 2014 was an unusual year? One way might be to repeatedly sample the remainders (without replacement) each time asking if the 2014 peak value was in the 1% tail.
+
+
+```r
+N <- 1e4
+cutoff <- floor(length(resids)*0.01)
+inTail <- logical(N)
+for(i in 1:N){
+  sampl <- sample(resids, replace = T)
+  inTail[i] <- fifteenPeak > sort(sampl, T)[cutoff]
+}
+mean(inTail)
+```
+
+```
+## [1] 0.9526
+```
+
+The 2014/15 winter peak mortality is in the 1% tail in 95.26 % of samples. Good evidence that this value is unsusual. Not that surprising since there are only 3 other residuals larger than it. So seasonal mortality winter 2014/15 does appear to have been unusually high.
+
+1. A full description of the method can be found in the following reference. R. B. Cleveland, W. S. Cleveland, J.E. McRae, and I. Terpenning (1990) STL: A Seasonal-Trend Decomposition Procedure Based on Loess. Journal of Official Statistics, 6, 3–73
