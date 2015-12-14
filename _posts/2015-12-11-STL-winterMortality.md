@@ -99,11 +99,11 @@ text(fifteenPeak, 100, "2014/15 winter\npeak value", pos = 4)
 
 ![plot of chunk unnamed-chunk-5](/figure/source/2015-12-11-STL-winterMortality/unnamed-chunk-5-1.png) 
 
-How can we test the hypothesis that 2014 was an unusual year? One way might be to repeatedly sample the remainders (without replacement) each time asking if the 2014 peak value was in the 1% tail.
+How can we test the hypothesis that 2014 was an unusual year? One way might be to repeatedly sample the remainders (with replacement) each time asking if the 2014 peak value was in the 1% tail.
 
 
 ```r
-N <- 1e4
+N <- 1e5
 cutoff <- floor(length(resids)*0.01)
 inTail <- logical(N)
 for(i in 1:N){
@@ -114,9 +114,9 @@ mean(inTail)
 ```
 
 ```
-## [1] 0.9485
+## [1] 0.94958
 ```
 
-The 2014/15 winter peak mortality is in the 1% tail in 94.85 % of samples. Good evidence that this value is unsusual. Not that surprising since there are only 3 other residuals larger than it. So seasonal mortality winter 2014/15 does appear to have been unusually high.
+The 2014/15 winter peak mortality is in the 1% tail in 94.958 % of samples. Good evidence that this value is unsusual. Not that surprising since there are only 3 other residuals larger than it. So seasonal mortality winter 2014/15 does appear to have been unusually high.
 
 1. A full description of the method can be found in the following reference. R. B. Cleveland, W. S. Cleveland, J.E. McRae, and I. Terpenning (1990) STL: A Seasonal-Trend Decomposition Procedure Based on Loess. Journal of Official Statistics, 6, 3–73

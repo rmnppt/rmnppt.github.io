@@ -69,10 +69,10 @@ abline(v = fifteenPeak, col = "black")
 text(fifteenPeak, 100, "2014/15 winter\npeak value", pos = 4)
 ```
 
-How can we test the hypothesis that 2014 was an unusual year? One way might be to repeatedly sample the remainders (without replacement) each time asking if the 2014 peak value was in the 1% tail.
+How can we test the hypothesis that 2014 was an unusual year? One way might be to repeatedly sample the remainders (with replacement) each time asking if the 2014 peak value was in the 1% tail.
 
 ```{r}
-N <- 1e4
+N <- 1e5
 cutoff <- floor(length(resids)*0.01)
 inTail <- logical(N)
 for(i in 1:N){
