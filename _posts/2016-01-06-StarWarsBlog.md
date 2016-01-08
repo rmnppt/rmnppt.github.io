@@ -6,6 +6,8 @@ output: html_document
 layout: post
 ---
 
+**EDIT:** Thanks to [timvink](https://github.com/timvink) for bringing to my attention `library(ggrepel)` which can be installed via `devtools::install_github("slowkow/ggrepel")`. It fixes the overlap of labels in the first figure below. Great! This is something I have been looking for!
+
 Last year in December, in time for the big release, myself and a colleague at The Data Lab were having some fun with an Star Wars character names that we had scraped from [Wikipedia](https://en.wikipedia.org/wiki/List_of_Star_Wars_characters). Luckily for us a national outlet, The Scotsman [picked up on this](http://www.scotsman.com/edinburgh/what-nationality-would-star-wars-characters-be-in-the-real-world-1-3976537) and put out an article on their website. We had the idea one lunch time to attempt to cluster the Star Wars names by similarity. What we setlled on was to classify the names into groups. One way to do this is to employ the popular text categorisation software 'textcat'. This can be used to classify new unseen text on the basis of a labelled corpus of previous text. In this case we will use it to classify the language of the unseen text. I've put two key papers in the footnotes here which I heartily recommend, thanks to all athors and conrtibuters[^1]. I'll explain the basis of the method here briefly.
 
 First the labelled corpus of text is split into letter [n-grams](https://en.wikipedia.org/wiki/N-gram) or consecutive letter combinations. For example the word STAR would be split into S, T, A, R, ST, TA, AR, STA and TAR and STAR. An n-gram frequency distribution can be attrubuted to each class, in this case each language. The unseen text is then also split into n-grams and a frequency distribution generated. Then its a matter of using a distance measure to compare the n-grams of the unseen text to those of the labelled corpus and choosing the smallest distance. All of this is done for you in the beautiful R package `textcat` see [^1]. 
@@ -20,6 +22,7 @@ library(MASS)
 library(textcat)
 library(dplyr)
 library(ggplot2)
+library(ggrepel)
 library(pander)
 
 charNames <- read.csv("https://raw.githubusercontent.com/rmnppt/StarWars_textcat/master/Data/star_wars_dataframe.csv", 
@@ -49,8 +52,11 @@ distances <- data.frame(
 )
 
 ggplot(distances, aes(x = x, y = y)) +
-  geom_point() +
-  geom_text(aes(label = lang), hjust = -0.1, colour = grey(0.5))
+  geom_point(size = 1.5) +
+  geom_text_repel(aes(label = lang), 
+                  colour = grey(0.6), 
+                  segment.color = grey(0.8),
+                  segment.size = 0.25)
 ```
 
 ![plot of chunk unnamed-chunk-2](/figure/source/2016-01-06-StarWarsBlog/unnamed-chunk-2-1.png) 
