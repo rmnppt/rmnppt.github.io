@@ -12,6 +12,6 @@ This site is hosted by github pages and each post is written in R markdown. The 
 
 Please feel free to contact me about any of this.
 
-In a former life I did research into bacterial communication and cooperation. If you're interested in reading any of this the best place to start is on [my google scholar profile](https://scholar.google.co.uk/citations?user=B8e_XeYAAAAJ&hl=en&oi=ao).
+In a former life I did research into bacterial communication and cooperation. If you're interested in reading any of my previous papers on this the best place to go is [my google scholar profile](https://scholar.google.co.uk/citations?user=B8e_XeYAAAAJ&hl=en&oi=ao).
 
 
