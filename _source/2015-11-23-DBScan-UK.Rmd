@@ -50,7 +50,7 @@ noise  <- UK %>% filter(cluster == 0)
 
 Now lets have a look at the results[^2].
 
-```{r}
+```{r, dev='svg'}
 ggplot(UK, aes(x = long, y = lat, alpha = 0.5)) + 
   geom_point(aes(fill = "grey"), noise) +
   geom_point(aes(colour = as.factor(cluster)), groups,
