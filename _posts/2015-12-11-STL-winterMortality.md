@@ -49,7 +49,7 @@ Xindex <- which(dat$decimalYears %% 1 == 0)
 axis(1, labels = dat$decimalYears[Xindex], at = Xindex)
 ```
 
-![plot of chunk unnamed-chunk-3](/figure/source/2015-12-11-STL-winterMortality/unnamed-chunk-3-1.png) 
+![plot of chunk unnamed-chunk-3](/figure/source/2015-12-11-STL-winterMortality/unnamed-chunk-3-1.svg) 
 
 First lets test if the overall trend (3rd panel) is decreasing.
 
@@ -97,7 +97,7 @@ abline(v = fifteenPeak, col = "black")
 text(fifteenPeak, 100, "2014/15 winter\npeak value", pos = 4)
 ```
 
-![plot of chunk unnamed-chunk-5](/figure/source/2015-12-11-STL-winterMortality/unnamed-chunk-5-1.png) 
+![plot of chunk unnamed-chunk-5](/figure/source/2015-12-11-STL-winterMortality/unnamed-chunk-5-1.svg) 
 
 How can we test the hypothesis that 2014 was an unusual year? One way might be to repeatedly sample the remainders (with replacement) each time asking if the 2014 peak value was in the 1% tail.
 
@@ -114,10 +114,10 @@ mean(inTail)
 ```
 
 ```
-## [1] 0.94969
+## [1] 0.9492
 ```
 
-The 2014/15 winter peak mortality is in the 1% tail in 94.969 % of samples. Good evidence that this value is unsusual. Not that surprising since there are only 3 other residuals larger than it. So seasonal mortality winter 2014/15 does appear to have been unusually high.
+The 2014/15 winter peak mortality is in the 1% tail in 94.92 % of samples. Good evidence that this value is unsusual. Not that surprising since there are only 3 other residuals larger than it. So seasonal mortality winter 2014/15 does appear to have been unusually high.
 
 [.Rmd Script](https://raw.githubusercontent.com/rmnppt/rmnppt.github.io/master/_source/2015-12-11-STL-winterMortality.Rmd) for this post.
 

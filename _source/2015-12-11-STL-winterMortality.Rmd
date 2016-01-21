@@ -37,7 +37,7 @@ stl_series <- stl(t_series, 9)
 
 I have prepared a function to plot the results of the seasonal trend decomposition.
 
-```{r, device = "pdf", fig.width = 10, fig.height = 6}
+```{r, dev='svg', fig.width = 10, fig.height = 6}
 source("https://raw.githubusercontent.com/rmnppt/FruitAndVeg/master/Scripts/plotSTL.R")
 plotSTL(stl_series, "winter mortality", interval = 52)
 
@@ -59,7 +59,7 @@ Seems like an unambiguous negative trend then, although quite weak. The coeffici
 
 Now lets look at 2014 in the distribution of residuals or in the STL language, the remainder. 
 
-```{r, device = "pdf", fig.width = 8, fig.height = 5}
+```{r, dev='svg', fig.width = 8, fig.height = 5}
 resids <- stl_series$time.series[,"remainder"]
 fifteenPeak <- max(resids[dat$year == 2015])
 par(fg = "grey", las = 1)
