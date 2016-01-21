@@ -31,7 +31,7 @@ names(charNames) <- c("name", "desc")
 
 Thats the data loaded in, lets take a quick look at similarity between different n-gram profiles stored in the textcat package.
 
-```{r, message = FALSE}
+```{r, message = FALSE, dev='svg'}
 ds <- textcat_xdist(TC_char_profiles)
 mds <- isoMDS(ds)
 distances <- data.frame(
@@ -59,7 +59,7 @@ for(i in 1:nrow(charNames)){
 
 Thats done, now we can examine the results. For extra caution I refer again to the caveats in pragraph 3. With that in mind, lets look at which languages are most common.
 
-```{r}
+```{r, dev='svg'}
 counts <- data.frame(table(charNames$langCat))
 names(counts)[1] <- "language"
 counts$language <- reorder(counts$language, counts$Freq)

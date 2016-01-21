@@ -59,7 +59,7 @@ ggplot(distances, aes(x = x, y = y)) +
                   segment.size = 0.25)
 ```
 
-![plot of chunk unnamed-chunk-2](/figure/source/2016-01-06-StarWarsBlog/unnamed-chunk-2-1.png) 
+![plot of chunk unnamed-chunk-2](/figure/source/2016-01-06-StarWarsBlog/unnamed-chunk-2-1.svg) 
 
 Horrible overlap of text labels, I know. If you can overlook that for now, this picture gives us a good idea of which languages it will be harder to discriminate between. Now lets perform the text categorisation.
 
@@ -84,7 +84,7 @@ ggplot(counts, aes(x = language, y = Freq)) +
   coord_flip()
 ```
 
-![plot of chunk unnamed-chunk-4](/figure/source/2016-01-06-StarWarsBlog/unnamed-chunk-4-1.png) 
+![plot of chunk unnamed-chunk-4](/figure/source/2016-01-06-StarWarsBlog/unnamed-chunk-4-1.svg) 
 
 Lets have a look at characters that have been classified as either english or german.
 
