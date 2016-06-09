@@ -8,7 +8,7 @@ layout: post
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Part of our mission at The Data Lab is to create jobs in Data Science. This got us thinking that perhaps we should find a systematic way of quantifying the job market in Scotland and generally. We stumbled upon Adzuna, never heard of it? It's quite cool, looks and feels like a jobs board but is actually a very data enabled service. For example you can upload your CV and it will leverage its database of job ads to predict your salary worth. I still have not had the guts to upload my own :-)
+Part of our mission at The Data Lab is to create jobs in Data Science. This got us thinking that perhaps we should find a systematic way of quantifying the job market in Scotland and generally. We stumbled upon [Adzuna](https://www.adzuna.co.uk/), never heard of it? It's quite cool, looks and feels like a jobs board but is actually a very data enabled service. For example you can upload your CV and it will leverage its database of job ads to predict your salary worth. I still have not had the guts to upload my own :-)
 
 Anyway the good news for us is that Adzuna has a nice REST API that we can query and get results for Scotland or any geographical area. One of my short term goals was to learn more about packages in R and so I decided this was a good opportunity to develop a lightweight R package. First of all go and read [this blog](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/) by [Hilary Parker](https://twitter.com/hspter) which was an absolutely perfect distillation of the process. In fact, this page is a shameless re-hash of Hilary's page with my own function. Unless you're interested in getting job data or data from other REST API's then go and read her page instead.
 
