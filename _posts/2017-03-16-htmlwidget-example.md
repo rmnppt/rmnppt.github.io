@@ -4,7 +4,7 @@ output: html_document
 layout: post
 ---
 
-For a while now, I have been looking for ways to incorporate pretty D3 graphics into R markdown reports or shiny apps. 
+For a while now, I have been looking for ways to incorporate pretty D3 graphics into R markdown reports or shiny apps. Why? I like R for the ability to be able to do data handling, stats, ML all very easily with minimal code. But when you want to present something to clients or the public, there is no competition for the front end web stuff e.g. d3.js. The answer: htmlwidgets.
 
 [Here is my attempt so far](https://thedatalab.shinyapps.io/rc3_shiny_test/)
 
