@@ -27,6 +27,8 @@ So all in all the chain is...
 
 Where htmlwidgets is reaching through the border between R and JavaScript.
 
+[I forked the R package](https://github.com/rmnppt/rc3) from FRISS and when I get some time or there is a need, I will try to port some more C3 based templates and expose them to R functions in this way.
+
 This post is obviously not a tutorial just a flag and a signpost, to find out how to do this yourself, go to the FRISS Analytics tutorial either [here on rstudio](http://shiny.rstudio.com/tutorial/) or [here on github](https://github.com/FrissAnalytics/shinyJsTutorials). Thanks a million to the [folks at FRISS analytics](https://github.com/FrissAnalytics/shinyJsTutorials/graphs/contributors) and the [authors of htmlwidgets](https://github.com/ramnathv/htmlwidgets/graphs/contributors).
 
 
